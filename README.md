@@ -19,19 +19,19 @@
 
 9 Camera
 
-10
+10 Motor 1
 
-11
+11 Motor 2
 
-12
+12 Motor 3
 
-13 GND
+13 GND: Motors 1-6
 
-14
+14 Motor 4
 
-15
+15 Motor 5
 
-16
+16 Motor 6
 
 17
 
@@ -59,7 +59,7 @@
 
 29
 
-30
+30 RUN
 
 31
 
@@ -71,7 +71,7 @@
 
 35
 
-36 Camera
+36 3V3: Camera
 
 37
 
