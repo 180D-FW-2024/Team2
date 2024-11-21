@@ -2,12 +2,12 @@ from machine import Pin
 import time
 
 # Motors 1-6
-M1 = Pin(14, Pin.OUT) # W 
-M2 = Pin(15, Pin.OUT) # NW
-M3 = Pin(16, Pin.OUT) # N / front
-M4 = Pin(17, Pin.OUT) # NE
-M5 = Pin(19, Pin.OUT) # E
-M6 = Pin(20, Pin.OUT) # S / back
+M1 = Pin(10, Pin.OUT) # W 
+M2 = Pin(11, Pin.OUT) # NW
+M3 = Pin(12, Pin.OUT) # N / front
+M4 = Pin(14, Pin.OUT) # NE
+M5 = Pin(15, Pin.OUT) # E
+M6 = Pin(16, Pin.OUT) # S / back
 
 # Motor Functions
 def stop_all():
