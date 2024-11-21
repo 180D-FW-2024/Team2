@@ -1,45 +1,11 @@
-# Team2
+This is the base code needed to get usable angles from a BerryIMU
+using connected to a Raspberry Pi Pico, using I2C or SPI
+
+BerryIMUv3 is supported by this code
+
+Feel free to do whatever you like with this code.
+Distributed as-is; no warranty is given.
+
+https://ozzmaker.com/berryimu/
 
 
-pin planning
-
-1
-2
-3
-4
-5
-6 camera
-7 camera
-8
-9 camera
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19 camera
-20 camera
-21 camera
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36 camera
-37
-38 camera
-39
-40
