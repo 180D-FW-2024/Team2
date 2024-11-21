@@ -1,6 +1,7 @@
 from machine import Pin, I2C
 import time
 
+# this is for pico
 # Define I2C pins
 I2C_SDA_PIN = 4
 I2C_SCL_PIN = 5
