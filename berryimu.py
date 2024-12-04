@@ -23,6 +23,16 @@ import math
 import IMU
 import datetime
 import os
+import pyttsx3
+
+# Initialize TTS engine
+engine = pyttsx3.init()
+
+# Function to speak a message
+def speak(message):
+    print(f"Speaking: {message}")
+    engine.say(message)
+    engine.runAndWait()
 
 
 RAD_TO_DEG = 57.29578
@@ -420,7 +430,8 @@ while True:
     ##################### END Tilt Compensation ########################
 
     if (abs(gyroXangle-gyroX_avg) > 120) or (abs(gyroYangle-gyroY_avg) > 120):
-        outputString += "YOU HAVE FALLEN"
+        speak("I have fallen.")
+        time.sleep(0.03)
     if 0:                       #Change to '0' to stop showing the angles from the accelerometer
         outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (AccXangle, AccYangle)
 
