@@ -4,12 +4,12 @@ from gpiozero import DigitalOutputDevice
 import time
 
 # Motors 1-6
-M1 = DigitalOutputDevice(10)  # W 
-M2 = DigitalOutputDevice(11)  # NW
-M3 = DigitalOutputDevice(12)  # N / front
-M4 = DigitalOutputDevice(13)  # NE
-M5 = DigitalOutputDevice(15)  # E
-M6 = DigitalOutputDevice(16)  # S / back
+M1 = DigitalOutputDevice(33)  # W 
+M2 = DigitalOutputDevice(35)  # NW
+M3 = DigitalOutputDevice(36)  # N / front
+M4 = DigitalOutputDevice(37)  # NE
+M5 = DigitalOutputDevice(38)  # E
+M6 = DigitalOutputDevice(40)  # S / back
 
 # Motor Functions
 def stop_all():
