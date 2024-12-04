@@ -1,3 +1,5 @@
+<!-- Code used from https://github.com/opencv/opencv/tree/master/data/haarcascades -->
+
 <?xml version="1.0"?>
 <!--
    22x18 upperbody detector (see the detailed description below). 
