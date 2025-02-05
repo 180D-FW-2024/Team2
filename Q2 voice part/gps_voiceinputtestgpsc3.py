@@ -6,7 +6,7 @@ from geopy.distance import geodesic
 import gpsd
 
 # Initialize Google Maps API Client
-API_KEY = "AIzaSyBc_kcNpKXzDWEgzcSfQRXrUj6EQN9Nao8"
+API_KEY = "xxx"
 gmaps = googlemaps.Client(key=API_KEY)
 
 # Initialize Text-to-Speech
