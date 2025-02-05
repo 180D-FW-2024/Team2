@@ -13,7 +13,7 @@ def speak(text):
     engine.runAndWait()
 
 # Initialize Google Maps API
-API_KEY = "AIzaSyBc_kcNpKXzDWEgzcSfQRXrUj6EQN9Nao8"
+API_KEY = "xxx"
 gmaps = googlemaps.Client(key=API_KEY)
 
 # Function to fetch directions
