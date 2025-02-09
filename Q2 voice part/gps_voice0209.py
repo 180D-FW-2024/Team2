@@ -4,6 +4,8 @@ import pyttsx3
 import time
 from geopy.distance import geodesic
 import gpsd
+from bs4 import BeautifulSoup  # To clean instructions
+
 
 # Initialize Google Maps API Client
 API_KEY = "xxxx"
@@ -92,6 +94,64 @@ def get_gps_location():
 def calculate_distance(loc1, loc2):
     return geodesic(loc1, loc2).feet
 
+def fetch_directions(origin, destination):
+    try:
+        directions = gmaps.directions(
+            origin=origin,
+            destination=destination,
+            mode="walking"  # or "driving"
+        )
+        return directions
+    except Exception as e:
+        print(f"Error fetching directions: {e}")
+        return None
+
+def parse_and_announce(directions):
+    for step in directions[0]["legs"][0]["steps"]:
+        instruction = BeautifulSoup(step["html_instructions"], "html.parser").text
+        distance = step["distance"]["text"]
+        speak(f"{instruction}. In {distance}.")
+        print(f"{instruction} ({distance})")
+        time.sleep(1)
+
+def start_navigation(destination_address):
+    gpsd.connect()
+    print("GPS connected. Fetching initial location...")
+    try:
+        while True:
+            # Fetch real-time GPS location
+            gps_data = gpsd.get_current()
+            user_location = (gps_data.lat, gps_data.lon)
+
+            # Fetch updated directions
+            origin = f"{gps_data.lat},{gps_data.lon}"
+            directions = fetch_directions(origin, destination_address)
+
+            if directions:
+                parse_and_announce(directions)
+
+                # Monitor next step dynamically
+                for step in directions[0]["legs"][0]["steps"]:
+                    next_coords = (
+                        step["start_location"]["lat"],
+                        step["start_location"]["lng"],
+                    )
+                    while geodesic(user_location, next_coords).meters > 5:
+                        # Update real-time GPS
+                        gps_data = gpsd.get_current()
+                        user_location = (gps_data.lat, gps_data.lon)
+                        time.sleep(1)
+            else:
+                print("Failed to fetch directions. Retrying...")
+                time.sleep(5)
+    except KeyboardInterrupt:
+        print("Navigation stopped.")
+        speak("Navigation stopped.")
+    except Exception as e:
+        print(f"Error during navigation: {e}")
+        speak("An error occurred during navigation.")
+
+
 def navigate_route(route_steps):
     global current_location
     for step in route_steps:
@@ -131,6 +191,8 @@ def main():
 
     print("GPS connected. Fetching initial location...")
     speak("GPS connected. Fetching initial location...")
+    
+
     current_location = get_gps_location()
     if not current_location:
         print("SoleMate: Unable to fetch GPS location.")
@@ -163,6 +225,9 @@ def main():
                 if route_steps:
                     print("SoleMate: Starting real-time navigation.")
                     speak("Starting real-time navigation.")
+                    destination = "UCLA Bookstore, Los Angeles, CA, USA"
+                    speak("Starting real-time navigation.")
+                    start_navigation(destination)
                     navigate_route(route_steps)
             else:
                 print("SoleMate: Unable to set the destination.")
@@ -172,4 +237,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
