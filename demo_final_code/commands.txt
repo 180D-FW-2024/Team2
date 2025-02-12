@@ -1,0 +1,13 @@
+cd /home/lydiah/Desktop/Team2/2.12demo/demo_final_code
+
+obstacle+motors (demo)
+cd /home/lydiah/Desktop/Team2/2.12demo/demo_final_code
+source venv/bin/activate
+python demo_motor.py
+
+deactivate
+
+imu+motor+wireless (actual product with stable GPS signal)
+cd /home/lydiah/Desktop/Team2/2.12demo/demo_final_code
+python imu_server_input.py
+
