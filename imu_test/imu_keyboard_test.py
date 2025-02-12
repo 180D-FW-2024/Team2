@@ -215,27 +215,31 @@ IMU.initIMU()       #Initialise the accelerometer, gyroscope and compass
 callibrated = False
 fallen_counter = 0
         # Initialize variables to store the sums of the gyroscope values
-if (callibrated == False):
-    gyroX_sum = 0.0
-    gyroY_sum = 0.0
-    gyroZ_sum = 0.0
-    num_samples = 0
+        
+matched = False
+target = -9999
+while True:
+    if (callibrated == False):
+        gyroX_sum = 0.0
+        gyroY_sum = 0.0
+        gyroZ_sum = 0.0
+        num_samples = 0
 
     # Start a timer for 3 seconds of data collection
-    start_time = time.time()
+        start_time = time.time()
 
     # Collect samples for 3 seconds to average gyroscope values
-    while time.time() - start_time < 2:
-        GYRx = IMU.readGYRx()
-        GYRy = IMU.readGYRy()
-        GYRz = IMU.readGYRz()
+        while time.time() - start_time < 2:
+            GYRx = IMU.readGYRx()
+            GYRy = IMU.readGYRy()
+            GYRz = IMU.readGYRz()
 
             # Accumulate the gyroscope values
-        gyroX_sum += GYRx
-        gyroY_sum += GYRy
-        gyroZ_sum += GYRz
-        num_samples += 1
-        time.sleep(0.01)  # Small delay to avoid excessive CPU usage (adjust as needed)
+            gyroX_sum += GYRx
+            gyroY_sum += GYRy
+            gyroZ_sum += GYRz
+            num_samples += 1
+            time.sleep(0.01)  # Small delay to avoid excessive CPU usage (adjust as needed)
 
         # Calculate the averages of the gyroscope values
         gyroX_avg = gyroX_sum / num_samples * G_GAIN
@@ -245,11 +249,6 @@ if (callibrated == False):
         # Now, you can use these averaged values to adjust the gyroscope readings
         callibrated = True
         print("DONE")
-        
-matched = False
-target = -9999
-while True:
-
 
 
         #Threshold is set
@@ -556,6 +555,7 @@ while True:
     # Add testing code before the sleep
     if (matched or target == -9999):
         target = input("Enter target direction (0-360 degrees, or q to quit): ")
+        matched = False
     if target.lower() == 'q':
         break
     try:
